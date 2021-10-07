@@ -1,54 +1,69 @@
-// Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
-@use '~@angular/material' as mat;
-// Plus imports for other components in your app.
+////////////////////////////////////////////////////////////////////////////////
+// Application Styles
+////////////////////////////////////////////////////////////////////////////////
 
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
+@use '~@angular/material' as mat;
+
 @include mat.core();
 
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-$portfolio-primary: mat.define-palette(mat.$blue-grey-palette);
-$portfolio-accent: mat.define-palette(mat.$light-blue-palette, A200, A100, A400);
+////////////////////////////////////////
+// Theming
+////////////////////////////////////////
 
-// The warn palette is optional (defaults to red).
-$portfolio-warn: mat.define-palette(mat.$deep-orange-palette);
+////////////////////
+// Light Theme
+////////////////////
 
-// Create the theme object. A theme consists of configurations for individual
-// theming systems such as "color" or "typography".
-$portfolio-theme: mat.define-light-theme(
+$portfolio-light-primary: mat.define-palette(mat.$blue-grey-palette);
+$portfolio-light-accent: mat.define-palette(mat.$light-blue-palette, A200, A100, A400);
+$portfolio-light-warn: mat.define-palette(mat.$deep-orange-palette);
+
+$portfolio-light-theme: mat.define-light-theme(
   (
     color: (
-      primary: $portfolio-primary,
-      accent: $portfolio-accent,
-      warn: $portfolio-warn,
+      primary: $portfolio-light-primary,
+      accent: $portfolio-light-accent,
+      warn: $portfolio-light-warn,
     ),
   )
 );
 
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-@include mat.all-component-themes($portfolio-theme);
+////////////////////
+// Dark Theme
+////////////////////
 
-/* You can add global styles to this file, and also import other style files */
+$portfolio-dark-primary: mat.define-palette(mat.$blue-grey-palette);
+$portfolio-dark-accent: mat.define-palette(mat.$deep-purple-palette, A200, A100, A400);
+$portfolio-dark-warn: mat.define-palette(mat.$red-palette);
+
+$portfolio-dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $portfolio-dark-primary,
+      accent: $portfolio-dark-accent,
+      warn: $portfolio-dark-warn,
+    ),
+  )
+);
+
+// Default to light theme.
+
+@include mat.all-component-themes($portfolio-light-theme);
+
+.portfolio-dark-theme {
+  @include mat.all-component-colors($portfolio-dark-theme);
+}
+
+////////////////////////////////////////
+// Global Styles
+////////////////////////////////////////
 
 html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
-}
-
-.flex-container {
-  display: flex !important;
-}
-
-.flex-filler {
-  flex: 1 1 auto !important;
 }
