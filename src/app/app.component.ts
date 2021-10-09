@@ -1,7 +1,7 @@
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component, HostBinding, OnInit } from '@angular/core';
 
-import { ThemingService } from './core/services/theming/theming.service';
+import { ThemingService } from './core/services/theming.service';
 
 /**
  * Root application component.

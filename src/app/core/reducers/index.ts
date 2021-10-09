@@ -1,4 +1,5 @@
 import { InjectionToken } from '@angular/core';
+import * as fromRouter from '@ngrx/router-store';
 import {
   Action,
   ActionReducer,
@@ -21,6 +22,7 @@ import * as fromTheming from './theming.reducer';
  * Application state. Composed from core feature states.
  */
 export interface State {
+  router: fromRouter.RouterReducerState;
   [fromTheming.themingFeatureKey]: fromTheming.State;
 }
 
@@ -29,6 +31,7 @@ export interface State {
  */
 export const ROOT_REDUCERS = new InjectionToken<ActionReducerMap<State, Action>>('Root reducers token', {
   factory: () => ({
+    router: fromRouter.routerReducer,
     [fromTheming.themingFeatureKey]: fromTheming.reducer,
   }),
 });

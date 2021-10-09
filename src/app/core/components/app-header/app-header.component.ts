@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-import { ThemingService } from '../../services/theming/theming.service';
+import { ThemingService } from '../../services/theming.service';
 
 /**
  * Application header component.

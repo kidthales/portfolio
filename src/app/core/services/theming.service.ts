@@ -3,9 +3,9 @@ import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { ThemingActions } from '../../actions';
-import { selectDarkMode, selectTheme, selectThemingState } from '../../reducers';
-import { initialState, State } from '../../reducers/theming.reducer';
+import { ThemingActions } from '../actions';
+import { selectDarkMode, selectTheme, selectThemingState } from '../reducers';
+import { initialState, State } from '../reducers/theming.reducer';
 
 /**
  * Provides API to the application theming core feature state.
@@ -78,6 +78,7 @@ export class ThemingService {
       map(([darkMode, theme]) => ThemingService.makeClassName(theme, darkMode))
     );
 
+    // eslint-disable-next-line ngrx/no-store-subscription
     store.select(selectThemingState).subscribe(this.state$);
   }
 }

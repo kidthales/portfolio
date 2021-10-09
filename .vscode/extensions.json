@@ -1,3 +1,10 @@
 {
-	"recommendations": ["dbaeumer.vscode-eslint", "EditorConfig.EditorConfig", "esbenp.prettier-vscode"]
+	"recommendations": [
+		"angular.ng-template",
+		"dbaeumer.vscode-eslint",
+		"EditorConfig.EditorConfig",
+		"esbenp.prettier-vscode",
+		"johnpapa.angular2",
+		"nrwl.angular-console"
+	]
 }

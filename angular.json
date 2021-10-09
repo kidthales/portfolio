@@ -127,6 +127,6 @@
   },
   "defaultProject": "portfolio",
   "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
+    "defaultCollection": "@ngrx/schematics"
   }
 }
