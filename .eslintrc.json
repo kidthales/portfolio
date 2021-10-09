@@ -8,11 +8,12 @@
         "project": ["tsconfig.json"],
         "createDefaultProgram": true
       },
-      "plugins": ["prettier"],
+      "plugins": ["prettier", "ngrx"],
       "extends": [
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates",
-        "prettier"
+        "prettier",
+        "plugin:ngrx/recommended"
       ],
       "rules": {
         "@angular-eslint/directive-selector": [
