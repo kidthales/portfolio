@@ -1,0 +1,166 @@
+<mat-card fxLayout>
+  <div fxLayout="column" fxLayoutAlign="space-around">
+    <mat-card-header fxFlex="auto">
+      <div mat-card-avatar></div>
+
+      <mat-card-title>
+        <h1 style="margin: 0">Tristan Bonsor</h1>
+      </mat-card-title>
+
+      <mat-card-subtitle>
+        <h2 style="margin: 0">Software Engineering</h2>
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content fxFlex="auto" fxFlexOffset.xs="-16px">
+      <mat-accordion fxHide.lt-sm>
+        <!-- Topic 1 -->
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title fxLayoutAlign="center center">
+              <mat-icon color="warn">{{ topic1.icon }}</mat-icon>
+              <h3>{{ topic1.title }}</h3>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <ng-template #topic1Details matExpansionPanelContent>
+            <div class="details-content" mat-dialog-content>
+              <div class="topic-title" fxLayout fxHide.gt-xs>
+                <mat-icon color="warn">{{ topic1.icon }}</mat-icon>
+                <h3>{{ topic1.title }}</h3>
+              </div>
+
+              <div class="details-title" fxLayoutAlign="start center">
+                <mat-icon color="accent">devices</mat-icon>
+                <h4 class="mat-body-strong">Client</h4>
+              </div>
+
+              <p>Development for web & mobile platforms with HTML5, Android, Angular, Phaser, & Unity</p>
+
+              <div class="details-title mat-body-strong" fxLayoutAlign="start center">
+                <mat-icon color="accent">cloud</mat-icon>
+                <h4 class="mat-body-strong">Server</h4>
+              </div>
+
+              <p>Web & data layer development with MySQL, Postgres, Couchbase, Apache, Nginx, Express, & Laravel.</p>
+            </div>
+          </ng-template>
+        </mat-expansion-panel>
+
+        <!-- Topic 2 -->
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title fxLayoutAlign="center center">
+              <mat-icon color="warn">{{ topic2.icon }}</mat-icon>
+              <h3>{{ topic2.title }}</h3>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <ng-template #topic2Details matExpansionPanelContent>
+            <div class="details-content" mat-dialog-content>
+              <div class="topic-title" fxLayout fxHide.gt-xs>
+                <mat-icon color="warn">{{ topic2.icon }}</mat-icon>
+                <h3>{{ topic2.title }}</h3>
+              </div>
+
+              <div class="details-title mat-body-strong" fxLayoutAlign="start center">
+                <mat-icon color="accent">all_inclusive</mat-icon>
+                <h4 class="mat-body-strong">Devops</h4>
+              </div>
+
+              <p>
+                Development & deployment infrastructure with Docker, Kubernetes, Jenkins, GitHub Actions, GitLab CI/CD,
+                & BitBucket Pipelines.
+              </p>
+
+              <div class="details-title mat-body-strong" fxLayoutAlign="start center">
+                <mat-icon color="accent">insights</mat-icon>
+                <h4 class="mat-body-strong">Liveops</h4>
+              </div>
+
+              <p>
+                Operations for highly scalable services; maintain end-user satisfaction & improve product delivery
+                through metrics analysis.
+              </p>
+            </div>
+          </ng-template>
+        </mat-expansion-panel>
+
+        <!-- Topic 3 -->
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title fxLayoutAlign="center center">
+              <mat-icon color="warn">{{ topic3.icon }}</mat-icon>
+              <h3>{{ topic3.title }}</h3>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <ng-template #topic3Details matExpansionPanelContent>
+            <div class="details-content" mat-dialog-content>
+              <div class="topic-title" fxLayout fxHide.gt-xs>
+                <mat-icon color="warn">{{ topic3.icon }}</mat-icon>
+                <h3>{{ topic3.title }}</h3>
+              </div>
+
+              <mat-list role="list" dense>
+                <mat-list-item role="listitem">
+                  <mat-icon color="accent" mat-list-icon>games</mat-icon>
+                  <h4 mat-line>Game Development, Operations, & Publishing</h4>
+                  <div mat-line>3 Years</div>
+                </mat-list-item>
+
+                <mat-list-item role="listitem">
+                  <mat-icon color="accent" mat-list-icon>public</mat-icon>
+                  <h4 mat-line>Web Development</h4>
+                  <div mat-line>7 Years</div>
+                </mat-list-item>
+
+                <mat-list-item role="listitem">
+                  <mat-icon color="accent" mat-list-icon>school</mat-icon>
+                  <h4 mat-line>B.Sc. Computing Science</h4>
+                  <div mat-line>4 Years</div>
+                </mat-list-item>
+              </mat-list>
+            </div>
+          </ng-template>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+      <div fxHide.gt-xs fxLayout="column">
+        <!-- Topic 1 -->
+        <button (click)="openTopic1Details()" mat-button>
+          <mat-icon color="warn">{{ topic1.icon }}</mat-icon>
+          {{ topic1.title }}
+        </button>
+
+        <!-- Topic 2 -->
+        <button (click)="openTopic2Details()" mat-button>
+          <mat-icon color="warn">{{ topic2.icon }}</mat-icon>
+          {{ topic2.title }}
+        </button>
+
+        <!-- Topic 3 -->
+        <button (click)="openTopic3Details()" mat-button>
+          <mat-icon color="warn">{{ topic3.icon }}</mat-icon>
+          {{ topic3.title }}
+        </button>
+      </div>
+    </mat-card-content>
+  </div>
+
+  <div fxFlex="auto">
+    <mat-card-actions fxLayout="column" fxLayoutAlign="space-evenly center">
+      <a href="https://www.linkedin.com/in/tristan-bonsor" target="_blank" title="LinkedIn" mat-button>
+        <mat-icon color="accent" svgIcon="linkedin"></mat-icon>
+      </a>
+
+      <a href="https://github.com/kidthales" target="_blank" title="GitHub" mat-button>
+        <mat-icon color="accent" svgIcon="github"></mat-icon>
+      </a>
+
+      <a href="mailto:tristan@agogpixel.com" title="Email" mat-button>
+        <mat-icon color="accent">mail_outline</mat-icon>
+      </a>
+    </mat-card-actions>
+  </div>
+</mat-card>

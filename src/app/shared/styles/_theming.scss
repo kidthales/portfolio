@@ -1,0 +1,186 @@
+////////////////////////////////////////////////////////////////////////////////
+/// Theming Partials
+///
+/// See https://material.angular.io/guide/theming
+////////////////////////////////////////////////////////////////////////////////
+
+@use 'sass:map';
+
+@use '~@angular/material/core/color/all-color' as mat-all-color;
+@use '~@angular/material/core/theming/all-theme' as mat-all-theme;
+@use '~@angular/material/core/theming/palette' as mat-palette;
+@use '~@angular/material/core/theming/theming' as mat-theming;
+
+/// Blue Steel (Light).
+
+$blue-steel-light-theme-primary-palette: mat-theming.define-palette(mat-palette.$blue-grey-palette);
+$blue-steel-light-theme-accent-palette: mat-theming.define-palette(mat-palette.$blue-palette, A200, A100, A400);
+$blue-steel-light-theme-warn-palette: mat-theming.define-palette(mat-palette.$deep-orange-palette);
+
+$blue-steel-light-theme: mat-theming.define-light-theme(
+  (
+    color: (
+      primary: $blue-steel-light-theme-primary-palette,
+      accent: $blue-steel-light-theme-accent-palette,
+      warn: $blue-steel-light-theme-warn-palette,
+    ),
+  )
+);
+
+/// Blue Steel (Dark).
+
+$blue-steel-dark-theme-primary-palette: mat-theming.define-palette(mat-palette.$blue-grey-palette);
+$blue-steel-dark-theme-accent-palette: mat-theming.define-palette(mat-palette.$light-blue-palette, A200, A100, A400);
+$blue-steel-dark-theme-warn-palette: mat-theming.define-palette(mat-palette.$orange-palette);
+
+$blue-steel-dark-theme: mat-theming.define-dark-theme(
+  (
+    color: (
+      primary: $blue-steel-dark-theme-primary-palette,
+      accent: $blue-steel-dark-theme-accent-palette,
+      warn: $blue-steel-dark-theme-warn-palette,
+    ),
+  )
+);
+
+/// Barney (Light).
+
+$barney-light-theme-primary-palette: mat-theming.define-palette(mat-palette.$purple-palette);
+$barney-light-theme-accent-palette: mat-theming.define-palette(mat-palette.$green-palette, A400, A200, A700);
+$barney-light-theme-warn-palette: mat-theming.define-palette(mat-palette.$amber-palette);
+
+$barney-light-theme: mat-theming.define-light-theme(
+  (
+    color: (
+      primary: $barney-light-theme-primary-palette,
+      accent: $barney-light-theme-accent-palette,
+      warn: $barney-light-theme-warn-palette,
+    ),
+  )
+);
+
+/// Barney (Dark).
+
+$barney-dark-theme-primary-palette: mat-theming.define-palette(mat-palette.$purple-palette);
+$barney-dark-theme-accent-palette: mat-theming.define-palette(mat-palette.$green-palette, A200, A100, A400);
+$barney-dark-theme-warn-palette: mat-theming.define-palette(mat-palette.$yellow-palette);
+
+$barney-dark-theme: mat-theming.define-dark-theme(
+  (
+    color: (
+      primary: $barney-dark-theme-primary-palette,
+      accent: $barney-dark-theme-accent-palette,
+      warn: $barney-dark-theme-warn-palette,
+    ),
+  )
+);
+
+/// Hub City (Light).
+
+$hub-city-light-theme-primary-palette: mat-theming.define-palette(mat-palette.$brown-palette);
+$hub-city-light-theme-accent-palette: mat-theming.define-palette(mat-palette.$orange-palette, A200, A100, A700);
+$hub-city-light-theme-warn-palette: mat-theming.define-palette(mat-palette.$pink-palette);
+
+$hub-city-light-theme: mat-theming.define-light-theme(
+  (
+    color: (
+      primary: $hub-city-light-theme-primary-palette,
+      accent: $hub-city-light-theme-accent-palette,
+      warn: $hub-city-light-theme-warn-palette,
+    ),
+  )
+);
+
+/// Hub City (Dark).
+
+$hub-city-dark-theme-primary-palette: mat-theming.define-palette(mat-palette.$brown-palette);
+$hub-city-dark-theme-accent-palette: mat-theming.define-palette(mat-palette.$yellow-palette, A200, A100, A400);
+$hub-city-dark-theme-warn-palette: mat-theming.define-palette(mat-palette.$red-palette);
+
+$hub-city-dark-theme: mat-theming.define-dark-theme(
+  (
+    color: (
+      primary: $hub-city-dark-theme-primary-palette,
+      accent: $hub-city-dark-theme-accent-palette,
+      warn: $hub-city-dark-theme-warn-palette,
+    ),
+  )
+);
+
+/// Extract a theme's color (RGBA).
+///
+/// @param {Map} $theme A complete Angular Material theme map.
+/// @param {String} $palette One of 'primary', 'accent', 'warn', 'foreground', or 'background'.
+/// @param {String | Number} $hue The hue from the palette to use. If this is a value between 0 and 1, it will be
+//     treated as opacity.
+/// @param {Number} $opacity The alpha channel value for the color.
+/// @returns {Color} The color for the given theme, palette, hue, and opacity.
+@function extract-theme-color($theme, $palette, $hue: default, $opacity: null) {
+  @return mat-theming.get-color-from-palette(map.get(map.get($theme, color), $palette), $hue, $opacity);
+}
+
+/// Include all themes. Create theme & include all of the color styles.
+@mixin all-themes() {
+  /// Create theme structure.
+  /// Default to `.blue-steel-light-theme` color styles.
+  @include mat-all-theme.all-component-themes($blue-steel-light-theme);
+
+  /// Include all other theme color styles, scoped to their respective CSS class.
+
+  .blue-steel-dark-theme {
+    @include mat-all-color.all-component-colors($blue-steel-dark-theme);
+  }
+
+  .barney-light-theme {
+    @include mat-all-color.all-component-colors($barney-light-theme);
+  }
+
+  .barney-dark-theme {
+    @include mat-all-color.all-component-colors($barney-dark-theme);
+  }
+
+  .hub-city-light-theme {
+    @include mat-all-color.all-component-colors($hub-city-light-theme);
+  }
+
+  .hub-city-dark-theme {
+    @include mat-all-color.all-component-colors($hub-city-dark-theme);
+  }
+}
+
+/// Include specified property with a color from current theme as a value.
+///
+/// @param {String} $property CSS property to be assigned the color value.
+/// @param {String} $palette One of 'primary', 'accent', 'warn', 'foreground', or 'background'.
+/// @param {String | Number} $hue The hue from the palette to use. If this is a value between 0 and 1, it will be
+//     treated as opacity.
+/// @param {Number} $opacity The alpha channel value for the color.
+@mixin theme-colored-property($property, $palette, $hue: default, $opacity: null) {
+  & {
+    #{$property}: extract-theme-color($blue-steel-light-theme, $palette, $hue, $opacity);
+  }
+
+  .blue-steel-light-theme & {
+    #{$property}: extract-theme-color($blue-steel-light-theme, $palette, $hue, $opacity);
+  }
+
+  .blue-steel-dark-theme & {
+    #{$property}: extract-theme-color($blue-steel-dark-theme, $palette, $hue, $opacity);
+  }
+
+  .barney-light-theme & {
+    #{$property}: extract-theme-color($barney-light-theme, $palette, $hue, $opacity);
+  }
+
+  .barney-dark-theme & {
+    #{$property}: extract-theme-color($barney-dark-theme, $palette, $hue, $opacity);
+  }
+
+  .hub-city-light-theme & {
+    #{$property}: extract-theme-color($hub-city-light-theme, $palette, $hue, $opacity);
+  }
+
+  .hub-city-dark-theme & {
+    #{$property}: extract-theme-color($hub-city-dark-theme, $palette, $hue, $opacity);
+  }
+}

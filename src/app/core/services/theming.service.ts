@@ -1,4 +1,7 @@
+import { MediaMatcher } from '@angular/cdk/layout';
 import { Injectable } from '@angular/core';
+import { IconOptions, MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -40,6 +43,11 @@ export class ThemingService {
   readonly theme$ = this.store.select(selectTheme);
 
   /**
+   * Extra small screen height media query list.
+   */
+  readonly xsHeightMediaQueryList = this.mediaMatcher.matchMedia('(max-height: 599px)');
+
+  /**
    * Maintains direct access to current state values.
    */
   private readonly state$ = new BehaviorSubject<State>(initialState);
@@ -67,18 +75,39 @@ export class ThemingService {
   get theme(): string {
     return this.state$.value.theme;
   }
+  set theme(value: string) {
+    this.store.dispatch(ThemingActions.setTheme({ theme: value }));
+  }
 
   /**
    * Instantiate theming service.
    *
    * @param store Application state store.
+   * @param matIconRegistry Material icon registry.
+   * @param domSanitizer DOM sanitizer.
    */
-  constructor(private readonly store: Store) {
+  constructor(
+    private readonly store: Store,
+    private readonly matIconRegistry: MatIconRegistry,
+    private readonly domSanitizer: DomSanitizer,
+    private readonly mediaMatcher: MediaMatcher
+  ) {
     this.className$ = combineLatest([this.darkMode$, this.theme$]).pipe(
       map(([darkMode, theme]) => ThemingService.makeClassName(theme, darkMode))
     );
 
     // eslint-disable-next-line ngrx/no-store-subscription
     store.select(selectThemingState).subscribe(this.state$);
+  }
+
+  /**
+   * Registers an icon by URL in the default namespace.
+   *
+   * @param iconName Name under which the icon should be registered.
+   * @param url Resource url.
+   * @param options Icon options.
+   */
+  addSvgIcon(iconName: string, url: string, options?: IconOptions): void {
+    this.matIconRegistry.addSvgIcon(iconName, this.domSanitizer.bypassSecurityTrustResourceUrl(url), options);
   }
 }

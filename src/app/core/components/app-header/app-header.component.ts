@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { first } from 'rxjs/operators';
+import { Component } from '@angular/core';
 
 import { ThemingService } from '../../services/theming.service';
 
@@ -12,11 +10,13 @@ import { ThemingService } from '../../services/theming.service';
   templateUrl: './app-header.component.html',
   styleUrls: ['./app-header.component.scss'],
 })
-export class AppHeaderComponent implements OnInit {
+export class AppHeaderComponent {
   /**
-   * Dark mode theming control.
+   * Flag for extra small screen height.
    */
-  readonly darkModeControl = new FormControl();
+  get xsHeight(): boolean {
+    return this.themingService.xsHeightMediaQueryList.matches;
+  }
 
   /**
    * Instantiate application header component.
@@ -24,28 +24,4 @@ export class AppHeaderComponent implements OnInit {
    * @param themingService Provides read/write access to theming state.
    */
   constructor(private readonly themingService: ThemingService) {}
-
-  ngOnInit(): void {
-    this.initThemingControls();
-  }
-
-  /**
-   * Initialize application theming controls.
-   */
-  private initThemingControls(): this {
-    const darkModeControl = this.darkModeControl;
-    const theming = this.themingService;
-
-    // Update dark mode state on control toggle.
-    darkModeControl.valueChanges.subscribe((value: boolean) => {
-      if (value !== theming.darkMode) {
-        theming.darkMode = value;
-      }
-    });
-
-    // Set dark mode control to match initial dark mode state.
-    theming.darkMode$.pipe(first((value) => value !== undefined)).subscribe((value) => darkModeControl.setValue(value));
-
-    return this;
-  }
 }

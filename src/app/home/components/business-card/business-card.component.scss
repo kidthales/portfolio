@@ -1,0 +1,246 @@
+@use 'sass:math';
+
+@use '../../../shared/styles/breakpoint' as break;
+
+$card-aspect-x: 3.5;
+$card-aspect-y: 2;
+$card-aspect-ratio: math.div($card-aspect-x, $card-aspect-y);
+
+$card-width: 320px;
+$card-height: math.div($card-width, $card-aspect-ratio);
+
+$card-avatar-size: 40px;
+$card-title-font-size: 20px;
+$card-title-line-height: 20px;
+$card-subtitle-font-size: 14px;
+$card-subtitle-line-height: 20px;
+
+$card-topic-expansion-header-title-font-size: 16px;
+$card-topic-expansion-header-title-line-height: 20px;
+$card-topic-expansion-header-title-icon-size: 24px;
+
+$card-topic-details-title-font-size: 14px;
+$card-topic-details-title-line-height: 24px;
+$card-topic-details-title-icon-size: 24px;
+$card-topic-details-text-font-size: 12px;
+$card-topic-details-text-line-height: 20px;
+$card-topic-details-list-font-size: 12px;
+$card-topic-details-list-line-height: 20px;
+$card-topic-details-list-icon-size: 20px;
+$card-topic-details-list-item-height: 60px;
+
+$card-action-size: 24px;
+
+$card-scale-xs: 1;
+$card-scale-sm: 2;
+$card-scale-md: 3;
+$card-scale-lg: 4;
+$card-scale-xl: 6;
+
+@mixin scaled-card($scale) {
+  min-height: $card-height * $scale;
+  width: $card-width * $scale;
+
+  .mat-card-header {
+    padding-top: 4px;
+
+    .mat-card-avatar {
+      background-size: $card-avatar-size * $scale;
+      height: $card-avatar-size * $scale;
+      width: $card-avatar-size * $scale;
+    }
+
+    .mat-card-title {
+      h1 {
+        font-size: $card-title-font-size * $scale;
+        line-height: $card-title-line-height * $scale;
+      }
+    }
+
+    .mat-card-subtitle {
+      h2 {
+        font-size: $card-subtitle-font-size * $scale;
+        line-height: $card-subtitle-line-height * $scale;
+      }
+    }
+  }
+
+  .mat-card-content {
+    .mat-expansion-panel-header {
+      height: ($card-topic-expansion-header-title-icon-size + 8) * $scale;
+
+      .mat-expansion-panel-header-title {
+        h3 {
+          font-size: $card-topic-expansion-header-title-font-size * $scale;
+          line-height: $card-topic-expansion-header-title-line-height * $scale;
+        }
+
+        .mat-icon {
+          font-size: $card-topic-expansion-header-title-icon-size * $scale;
+          height: $card-topic-expansion-header-title-icon-size * $scale;
+          width: $card-topic-expansion-header-title-icon-size * $scale;
+        }
+      }
+    }
+  }
+
+  .mat-card-actions {
+    .mat-icon {
+      font-size: $card-action-size * $scale;
+      height: $card-action-size * $scale;
+      width: $card-action-size * $scale;
+    }
+  }
+}
+
+@mixin scaled-card-details($scale) {
+  $easing: math.div(($scale + 1), 2);
+
+  p {
+    font-size: $card-topic-details-text-font-size * $easing;
+    line-height: $card-topic-details-text-line-height * $easing;
+  }
+
+  .details-title {
+    h4 {
+      font-size: $card-topic-details-title-font-size * $easing;
+      line-height: $card-topic-details-title-line-height * $easing;
+    }
+
+    .mat-icon {
+      font-size: $card-topic-details-title-icon-size * $easing;
+      height: $card-topic-details-title-icon-size * $easing;
+      width: $card-topic-details-title-icon-size * $easing;
+    }
+  }
+
+  .mat-list-item {
+    height: $card-topic-details-list-item-height * $easing !important;
+
+    .mat-icon {
+      font-size: $card-topic-details-list-icon-size * $easing;
+      height: $card-topic-details-list-icon-size * $easing;
+      width: $card-topic-details-list-icon-size * $easing;
+    }
+
+    .mat-line {
+      font-size: $card-topic-details-list-font-size * $easing;
+      line-height: $card-topic-details-list-line-height * $easing;
+    }
+  }
+}
+
+:host {
+  .mat-card {
+    padding: 0;
+
+    .mat-card-header {
+      .mat-card-avatar {
+        background-image: url('/assets/img/logo.png');
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+    }
+
+    .mat-card-content {
+      margin-bottom: 0;
+      padding-left: 8px;
+
+      .mat-expansion-panel {
+        box-shadow: none;
+
+        .mat-expansion-panel-header {
+          padding: 0;
+
+          .mat-expansion-panel-header-title {
+            margin: 0;
+
+            h3 {
+              margin: 0;
+            }
+
+            .mat-icon {
+              padding-right: 8px;
+            }
+          }
+        }
+      }
+    }
+
+    .mat-card-actions {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+
+      .mat-button {
+        margin: 0;
+      }
+
+      @include break.gt-xs {
+        padding-right: 16px;
+      }
+    }
+
+    @include break.xs {
+      @include scaled-card($card-scale-xs);
+    }
+
+    @include break.sm {
+      @include scaled-card($card-scale-sm);
+    }
+
+    @include break.md {
+      @include scaled-card($card-scale-md);
+    }
+
+    @include break.gt-md {
+      @include scaled-card($card-scale-lg);
+    }
+  }
+}
+
+.details-content {
+  .topic-title {
+    h3 {
+      margin-top: 0;
+      margin-bottom: 8px;
+    }
+
+    .mat-icon {
+      padding-right: 8px;
+    }
+  }
+
+  .details-title {
+    h4 {
+      margin: 0;
+    }
+
+    .mat-icon {
+      padding-right: 8px;
+    }
+  }
+
+  .mat-list-item {
+    .mat-line {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+  }
+
+  @include break.xs {
+    @include scaled-card-details($card-scale-xs);
+  }
+
+  @include break.sm {
+    @include scaled-card-details($card-scale-sm);
+  }
+
+  @include break.md {
+    @include scaled-card-details($card-scale-md);
+  }
+
+  @include break.gt-md {
+    @include scaled-card-details($card-scale-lg);
+  }
+}

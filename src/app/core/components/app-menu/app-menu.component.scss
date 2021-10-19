@@ -1,0 +1,9 @@
+.theming-dialog {
+  .mat-list-item {
+    height: unset !important;
+
+    .mat-radio-button {
+      margin: 8px;
+    }
+  }
+}

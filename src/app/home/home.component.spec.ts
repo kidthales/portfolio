@@ -1,7 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 
-import { SharedModule } from '../shared/shared.module';
+import { ThemingService } from '../core/services/theming.service';
+import { SharedTestingModule } from '../shared/shared-testing.module';
 
+import { BusinessCardComponent } from './components/business-card/business-card.component';
 import { HomeComponent } from './home.component';
 
 describe('HomeComponent', () => {
@@ -10,8 +13,9 @@ describe('HomeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SharedModule],
-      declarations: [HomeComponent],
+      imports: [SharedTestingModule],
+      providers: [provideMockStore(), ThemingService],
+      declarations: [HomeComponent, BusinessCardComponent],
     }).compileComponents();
   });
 
@@ -21,7 +25,5 @@ describe('HomeComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  it('should create', () => expect(component).toBeTruthy());
 });

@@ -1,5 +1,9 @@
-<app-header></app-header>
+<app-header [@headerAnimation]="xsHeight ? 'hidden' : 'visible'"></app-header>
+<app-menu
+  [ngStyle]="xsHeight ? { position: 'fixed', top: '16px', right: '16px', 'z-index': '1' } : { display: 'none' }"
+  [@xsAppMenuFadeAnimation]="xsHeight ? 'visible' : 'hidden'"
+></app-menu>
 
-<app-main fxFlex="1"></app-main>
+<app-main fxFlex="auto"></app-main>
 
-<app-footer></app-footer>
+<app-footer [@footerAnimation]="xsHeight ? 'hidden' : 'visible'"></app-footer>

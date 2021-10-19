@@ -1,0 +1,55 @@
+<div>
+  <div *ngIf="xsHeight">
+    <button mat-mini-fab color="primary" [matMenuTriggerFor]="appMenu">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+
+  <div *ngIf="!xsHeight">
+    <ng-container [ngTemplateOutlet]="navList"></ng-container>
+    <button mat-icon-button [matMenuTriggerFor]="settingsMenu">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+</div>
+
+<ng-template #navList>
+  <mat-nav-list></mat-nav-list>
+</ng-template>
+
+<mat-menu #appMenu="matMenu">
+  <ng-template matMenuContent>
+    <ng-container [ngTemplateOutlet]="navList"></ng-container>
+    <!--<mat-divider></mat-divider>-->
+    <button mat-menu-item [matMenuTriggerFor]="settingsMenu">Settings</button>
+  </ng-template>
+</mat-menu>
+
+<mat-menu #settingsMenu="matMenu">
+  <ng-template matMenuContent>
+    <button (click)="openThemingDialog()" mat-menu-item>Theming</button>
+  </ng-template>
+</mat-menu>
+
+<ng-template #themingDialog>
+  <div class="theming-dialog">
+    <h3 mat-dialog-title>Theming</h3>
+    <mat-list>
+      <div mat-subheader>Theme</div>
+      <mat-list-item>
+        <mat-radio-group fxLayout="column" [formControl]="themeControl">
+          <mat-radio-button value="blue-steel">Blue Steel</mat-radio-button>
+          <mat-radio-button value="barney">Barney</mat-radio-button>
+          <mat-radio-button value="hub-city">Hub City</mat-radio-button>
+        </mat-radio-group>
+      </mat-list-item>
+
+      <div mat-subheader>Dark Mode</div>
+      <mat-list-item fxLayoutAlign="center">
+        <mat-icon>brightness_5</mat-icon>
+        <mat-slide-toggle [formControl]="darkModeControl"></mat-slide-toggle>
+        <mat-icon>bedtime</mat-icon>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</ng-template>

@@ -12,7 +12,7 @@
       "extends": [
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates",
-        "prettier",
+        "plugin:prettier/recommended",
         "plugin:ngrx/recommended"
       ],
       "rules": {
@@ -37,10 +37,33 @@
     },
     {
       "files": ["*.html"],
-      "plugins": ["prettier"],
-      "extends": ["plugin:@angular-eslint/template/recommended", "prettier"],
+      "extends": ["plugin:@angular-eslint/template/recommended"],
       "rules": {
-        "prettier/prettier": "error"
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "app",
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "app",
+            "style": "kebab-case"
+          }
+        ]
+      }
+    },
+    {
+      "files": ["*.html"],
+      "excludedFiles": ["*inline-template-*.component.html"],
+      "plugins": ["prettier"],
+      "extends": ["plugin:prettier/recommended"],
+      "rules": {
+        "prettier/prettier": ["error", { "parser": "angular" }]
       }
     }
   ]

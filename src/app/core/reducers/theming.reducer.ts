@@ -24,7 +24,7 @@ export interface State {
  */
 export const initialState: State = {
   darkMode: false,
-  theme: 'portfolio',
+  theme: 'blue-steel',
 };
 
 /**
@@ -32,6 +32,7 @@ export const initialState: State = {
  */
 export const reducer = createReducer(
   initialState,
+  on(ThemingActions.setTheme, (state, { theme }): State => ({ ...state, theme })),
   on(ThemingActions.activateDarkMode, (state): State => ({ ...state, darkMode: true })),
   on(ThemingActions.deactivateDarkMode, (state): State => ({ ...state, darkMode: false }))
 );

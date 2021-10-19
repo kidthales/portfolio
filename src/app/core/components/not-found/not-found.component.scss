@@ -1,0 +1,81 @@
+@use '../../../shared/styles/breakpoint' as break;
+
+$image-size: 64px;
+
+$image-scale-xs: 1.5;
+$image-scale-sm: 2;
+$image-scale-md: 4;
+$image-scale-lg: 6;
+$image-scale-xl: 8;
+
+@mixin scaled-image($scale) {
+  .mat-card {
+    .mat-card-image {
+      height: $image-size * $scale;
+      width: $image-size * $scale;
+    }
+  }
+}
+
+:host {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100%;
+
+  .mat-card {
+    .mat-card-image {
+      -webkit-animation: freakout 3s linear infinite;
+      -moz-animation: freakout 3s linear infinite;
+      animation: freakout 3s linear infinite;
+    }
+  }
+
+  @include break.xs {
+    @include scaled-image($image-scale-xs);
+  }
+
+  @include break.sm {
+    @include scaled-image($image-scale-sm);
+  }
+
+  @include break.md {
+    @include scaled-image($image-scale-md);
+  }
+
+  @include break.gt-md {
+    @include scaled-image($image-scale-lg);
+  }
+}
+
+@-moz-keyframes freakout {
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes freakout {
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes freakout {
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}

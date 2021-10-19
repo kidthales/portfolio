@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { SharedTestingModule } from '../../../shared/shared-testing.module';
+
 import { AppFooterComponent } from './app-footer.component';
 
 describe('AppFooterComponent', () => {
@@ -8,6 +10,7 @@ describe('AppFooterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [SharedTestingModule],
       declarations: [AppFooterComponent],
     }).compileComponents();
   });
@@ -18,7 +21,5 @@ describe('AppFooterComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  it('should create', () => expect(component).toBeTruthy());
 });

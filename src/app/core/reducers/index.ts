@@ -65,7 +65,9 @@ export function loggerReducer(reducer: ActionReducer<State>): ActionReducer<Stat
  * @param reducer Application state transition handler.
  */
 export function localStorageSyncReducer(reducer: ActionReducer<State>): ActionReducer<State> {
-  return localStorageSync({ keys: [{ [fromTheming.themingFeatureKey]: ['darkMode'] }], rehydrate: true })(reducer);
+  return localStorageSync({ keys: [{ [fromTheming.themingFeatureKey]: ['theme', 'darkMode'] }], rehydrate: true })(
+    reducer
+  );
 }
 
 /**

@@ -1,9 +1,9 @@
 <header>
-  <mat-toolbar color="primary">
-    <span>portfolio</span>
-    <span fxFlex="1 1 auto"></span>
-    <mat-icon>brightness_5</mat-icon>
-    <mat-slide-toggle [formControl]="darkModeControl"></mat-slide-toggle>
-    <mat-icon>bedtime</mat-icon>
+  <mat-toolbar color="primary" fxLayoutAlign="space-between center">
+    <span>
+      <button class="mat-headline" [routerLink]="['/']" mat-button>Tristan Bonsor</button>
+    </span>
+
+    <app-menu></app-menu>
   </mat-toolbar>
 </header>
